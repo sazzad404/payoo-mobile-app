@@ -1,4 +1,4 @@
-const validPin = 1536842;
+const validPin = 1234;
 const coupon = "sazzad50%";
 let couponUsed = false;
 
@@ -120,6 +120,13 @@ document
 		const totalNewAvailableBalance = amount + availableBalance;
 
 		setInnerText(totalNewAvailableBalance);
+		alert(
+			"You Added: " +
+				amount +
+				"$\nYour Current Balance: " +
+				totalNewAvailableBalance +
+				"$"
+		);
 
 		const data = {
 			name: "Add Money",
@@ -133,12 +140,11 @@ document
 document.getElementById("withdraw-btn").addEventListener("click", function (e) {
 	e.preventDefault();
 	const agentNumber = getInputValue("agent-number");
-	const pin = getInputValueNumber('cash-out-pin')
+	const pin = getInputValueNumber("cash-out-pin");
 
 	const amount = getInputValueNumber("withdraw-amount");
 
 	const availableBalance = getInnerText("available-balance");
-
 
 	if (amount <= 0 || amount > availableBalance) {
 		alert("Invalid Amount");
@@ -158,6 +164,14 @@ document.getElementById("withdraw-btn").addEventListener("click", function (e) {
 	const totalNewAvailableBalance = availableBalance - amount;
 
 	setInnerText(totalNewAvailableBalance);
+
+	alert(
+		"Cash Out: " +
+			amount +
+			"$\nYour Current Balance: " +
+			totalNewAvailableBalance +
+			"$"
+	);
 
 	const data = {
 		name: "Cash Out",
@@ -247,6 +261,14 @@ document
 
 		IdAvailableBalance.innerText = totalNewAvailableBalance;
 
+		alert(
+			"Transfer Money: " +
+				transferMoney +
+				"$\nYour Current Balance: " +
+				totalNewAvailableBalance +
+				"$"
+		);
+
 		const data = {
 			name: "Transfer Money",
 			date: new Date().toLocaleTimeString(),
@@ -275,7 +297,7 @@ document.getElementById("bonus-btn").addEventListener("click", function (e) {
 		const addBalance = (availableBalance * 50) / 100;
 		const totalNewAvailableBalance = availableBalance + addBalance;
 		couponUsed = true;
-		alert("Coupon applied! New price:" + totalNewAvailableBalance);
+		alert(" Congratulations, Coupon has applied! \n New Balance: " + totalNewAvailableBalance + "$");
 		setInnerText(totalNewAvailableBalance);
 	}
 
@@ -328,6 +350,14 @@ document
 
 		const totalNewAvailableBalance = availableBalance - amountToPay;
 		setInnerText(totalNewAvailableBalance);
+
+		alert(
+			"Amount To Pay: " +
+				amountToPay +
+				"$\nYour Current Balance: " +
+				totalNewAvailableBalance +
+				"$"
+		);
 
 		const data = {
 			name: "Pay Bill",
@@ -382,13 +412,10 @@ document
 		handleButtonToggle("transaction-button");
 	});
 
-
-
-
 //log out feature
 
-document.getElementById('logout-button').addEventListener('click', function(){
-	sessionStorage.clear()
-	localStorage.clear()
-	window.location.replace('./index.html')
-})
+document.getElementById("logout-button").addEventListener("click", function () {
+	sessionStorage.clear();
+	localStorage.clear();
+	window.location.replace("./index.html");
+});
